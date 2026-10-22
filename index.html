@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Fun Games</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: slim header, one confident hero line, three game tiles, then legal pages as hash views (#terms, #privacy) */
+:root{
+  --bg:#F6F7FB; --surface:#FFFFFF; --ink:#1A1D3A; --muted:#5A5F7D; --line:#E2E4EF;
+  --sun:#FFC83D; --coral:#FF5C4D; --sky:#3E7BFA; --mint:#2BB673;
+  --display:"Fredoka","Trebuchet MS",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12142A; --surface:#1B1E3A; --ink:#F1F2FA; --muted:#A4A8C6; --line:#2C3054;
+  --sun:#FFD25E; --coral:#FF7366; --sky:#6E9BFF; --mint:#45CC8A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12142A; --surface:#1B1E3A; --ink:#F1F2FA; --muted:#A4A8C6; --line:#2C3054;
+  --sun:#FFD25E; --coral:#FF7366; --sky:#6E9BFF; --mint:#45CC8A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+a{color:var(--sky)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.logo{width:42px;height:42px;border-radius:12px;background:var(--sun);display:grid;place-items:center;transform:rotate(-8deg)}
+.logo svg{width:28px;height:28px}
+.brand b{font-family:var(--display);font-weight:700;font-size:1.3rem;letter-spacing:.2px}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-weight:600;font-size:.95rem;color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:999px}
+nav a:hover{color:var(--ink);background:var(--line)}
+nav a[aria-current="page"]{color:var(--ink);background:var(--surface);box-shadow:0 0 0 1px var(--line)}
+
+.hero{padding-block:56px 40px;display:grid;gap:20px}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.02;margin:0;text-wrap:balance;max-width:14ch}
+.hero h1 .dot{color:var(--coral)}
+.hero h1 .u{background:linear-gradient(transparent 62%,var(--sun) 62%,var(--sun) 90%,transparent 90%)}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:52ch;margin:0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted)}
+
+h2{font-family:var(--display);font-weight:600;font-size:1.8rem;margin:0 0 18px;text-wrap:balance}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;padding-bottom:56px}
+.game{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.icon{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.6rem;color:#fff}
+.game h3{font-family:var(--display);font-weight:600;font-size:1.35rem;margin:0}
+.game p{margin:0;color:var(--muted)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.tag{font-size:.75rem;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--bg);color:var(--muted)}
+.tag.soon{background:var(--sun);color:#1A1D3A}
+
+.about{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;padding-block:8px 64px;border-top:1px solid var(--line);padding-top:40px}
+.about p{margin:0;color:var(--muted)}
+
+/* legal pages */
+.legal{max-width:720px;padding-block:40px 72px}
+.legal .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--coral)}
+.legal h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:6px 0 8px}
+.legal .date{color:var(--muted);margin:0 0 28px}
+.legal h2{font-size:1.25rem;margin:34px 0 8px}
+.legal p,.legal li{color:var(--ink)}
+.legal ul{padding-left:1.2em}
+.legal li{margin-bottom:6px}
+.note{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--sun);border-radius:12px;padding:14px 16px;color:var(--muted);font-size:.95rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.toc a{font-size:.85rem;text-decoration:none;padding:5px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding-block:24px 36px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+footer nav a{padding:4px 8px;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="brand" href="#home" aria-label="Happy Fun Games home">
+      <span class="logo" aria-hidden="true">
+        <svg viewBox="0 0 28 28"><rect x="2" y="2" width="24" height="24" rx="6" fill="#1A1D3A"/><circle cx="9.5" cy="10" r="2.2" fill="#FFC83D"/><circle cx="18.5" cy="10" r="2.2" fill="#FFC83D"/><path d="M8 16.5c1.6 3 4 4.2 6 4.2s4.4-1.2 6-4.2" stroke="#FFC83D" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <b>Happy Fun Games</b>
+    </a>
+    <nav aria-label="Main">
+      <a href="#home" data-view="home">Home</a>
+      <a href="#games" data-view="home">Games</a>
+      <a href="#terms" data-view="terms">Terms</a>
+      <a href="#privacy" data-view="privacy">Privacy</a>
+    </nav>
+  </header>
+
+  <!-- HOME -->
+  <main id="view-home">
+    <section class="hero">
+      <div class="chips"><span class="chip">Independent studio</span><span class="chip">Made in the UK</span><span class="chip">iPhone games</span></div>
+      <h1>Small games you play <span class="u">with your mates</span><span class="dot">.</span></h1>
+      <p>Happy Fun Games makes quick, loud, pass-the-phone party games. Easy to learn in a minute, hard to put down after ten.</p>
+    </section>
+
+    <section id="games" aria-labelledby="games-h">
+      <h2 id="games-h">Our games</h2>
+      <div class="games">
+        <article class="game">
+          <div class="icon" style="background:var(--coral)">E</div>
+          <h3>Empire</h3>
+          <p>Everyone picks a secret name. Guess who chose what, win their name into your empire, and keep going until one empire rules the room.</p>
+          <div class="meta"><span class="tag">Party</span><span class="tag">3+ players</span><span class="tag">Online lobbies</span></div>
+        </article>
+        <article class="game">
+          <div class="icon" style="background:var(--sky)">T</div>
+          <h3>Tap Duel</h3>
+          <p>Two players, one screen or two phones, and a race to tap fastest. Settle arguments, track head-to-head records with friends.</p>
+          <div class="meta"><span class="tag">1v1</span><span class="tag">Online &amp; local</span><span class="tag soon">Coming soon</span></div>
+        </article>
+        <article class="game">
+          <div class="icon" style="background:var(--mint)">C</div>
+          <h3>ComBETitive</h3>
+          <p>Back your football calls with free play coins and see who in your group really knows the game. No real money, ever.</p>
+          <div class="meta"><span class="tag">Football</span><span class="tag">Friends leagues</span><span class="tag soon">Coming soon</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" aria-label="About">
+      <div><h2>Who we are</h2><p>A small independent team based in Bristol, building the games we want to play on a night in.</p></div>
+      <div><h2>Get in touch</h2><p>Support, feedback or bug reports: <strong>[contact email]</strong>. We read everything.</p></div>
+    </section>
+  </main>
+
+  <!-- TERMS -->
+  <main id="view-terms" class="legal" hidden>
+    <div class="eyebrow">Legal</div>
+    <h1>Terms and Conditions</h1>
+    <p class="date">Effective 22 October 2026</p>
+
+    <div class="toc">
+      <a href="#terms">Top</a><a href="#privacy">Privacy Policy</a>
+    </div>
+
+    <p>These Terms and Conditions ("Terms") apply to every game and app published by Happy Fun Games ("we", "us", "our"), including Empire, Tap Duel and ComBETitive (together, the "Games"), and to this website. By downloading, installing or using a Game you agree to these Terms. If you do not agree, please do not use the Games.</p>
+
+    <h2>1. Who can use the Games</h2>
+    <p>You must be at least 13 years old to use the Games. If you are under 18, you confirm that a parent or guardian has agreed to these Terms on your behalf. ComBETitive is only available to users aged 18 and over.</p>
+
+    <h2>2. Your licence</h2>
+    <p>We grant you a personal, non-exclusive, non-transferable, revocable licence to download and use the Games on Apple devices you own or control, for personal, non-commercial entertainment, in line with these Terms and the Apple Media Services Terms and Conditions. All rights not expressly granted are reserved by us.</p>
+
+    <h2>3. Accounts</h2>
+    <p>Some features, such as online play, friends and leaderboards, may need an account. You are responsible for keeping your login details secure and for activity on your account. Usernames must not be offensive, impersonate anyone, or infringe anyone's rights. We may rename or remove accounts that break these Terms.</p>
+
+    <h2>4. Fair play and conduct</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>cheat, exploit bugs, or use bots, scripts or modified clients to gain an advantage;</li>
+      <li>harass, abuse or threaten other players, or share hateful, sexual or illegal content in names or lobbies;</li>
+      <li>reverse engineer, decompile, copy, resell or redistribute any part of the Games;</li>
+      <li>interfere with our servers or other players' enjoyment of the Games.</li>
+    </ul>
+    <p>We may suspend or end your access if you break these rules.</p>
+
+    <h2>5. Virtual coins and items</h2>
+    <p>Some Games use virtual coins, points or items ("Virtual Items"). Virtual Items have no real-world monetary value, cannot be exchanged for cash, money or prizes, and cannot be transferred or sold outside the Game. You have a limited licence to use them within the Game only. We may change, rebalance or remove Virtual Items at any time.</p>
+    <p><strong>ComBETitive is a free-to-play entertainment game. It does not offer real-money gambling and there is no opportunity to win money or anything of real value.</strong> Success in the game does not imply future success at real-money gambling. If gambling is causing you problems, visit <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a>.</p>
+
+    <h2>6. Purchases</h2>
+    <p>Any in-app purchases are processed by Apple through your App Store account and are subject to Apple's terms. Except where the law requires, all purchases are final. Refund requests are handled by Apple at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</p>
+
+    <h2>7. Advertising</h2>
+    <p>The Games may show advertisements, including ads delivered by third parties such as Google AdMob. Some Games may let you watch an optional ad in exchange for Virtual Items. We are not responsible for the content of third-party ads or the websites they link to.</p>
+
+    <h2>8. Third-party services</h2>
+    <p>The Games rely on third-party services, for example Google Firebase for online lobbies and accounts. Your use of those services may also be subject to their own terms.</p>
+
+    <h2>9. Intellectual property</h2>
+    <p>The Games, including their code, artwork, names, logos, characters and sounds, are owned by Happy Fun Games or our licensors and are protected by copyright and other laws.</p>
+
+    <h2>10. Changes and availability</h2>
+    <p>We may update, change or discontinue any Game or feature at any time, and online features may be unavailable during maintenance or outages. We may update these Terms; if the changes are significant we will let you know in the Game or on this page. Continuing to use the Games after changes means you accept the new Terms.</p>
+
+    <h2>11. Disclaimer</h2>
+    <p>The Games are provided "as is" and "as available". To the extent the law allows, we make no promise that the Games will be uninterrupted, error-free or free of harmful components.</p>
+
+    <h2>12. Limitation of liability</h2>
+    <p>Nothing in these Terms limits liability that cannot be limited by law, including for death or personal injury caused by negligence, or for fraud. Subject to that, we are not liable for any indirect or consequential loss, or for loss of data, Virtual Items or progress, and our total liability to you is limited to the amount you paid us in the 12 months before the claim. If you are a consumer in the UK, you also have legal rights that these Terms do not affect.</p>
+
+    <h2>13. Apple</h2>
+    <p>These Terms are between you and Happy Fun Games, not Apple. Apple is not responsible for the Games or their content, has no obligation to provide maintenance or support, and is not responsible for any claims relating to the Games. Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</p>
+
+    <h2>14. Governing law</h2>
+    <p>These Terms are governed by the laws of England and Wales. You and we both agree that the courts of England and Wales have non-exclusive jurisdiction, so if you live elsewhere in the UK you may also bring proceedings in your local courts.</p>
+
+    <h2>15. Contact</h2>
+    <p>Questions about these Terms: <strong>[contact email]</strong></p>
+  </main>
+
+  <!-- PRIVACY -->
+  <main id="view-privacy" class="legal" hidden>
+    <div class="eyebrow">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="date">Effective 22 October 2026</p>
+
+    <p>This policy explains what information Happy Fun Games collects when you use our Games and this website, and how we use it. We are the data controller under UK data protection law (UK GDPR and the Data Protection Act 2018).</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>Account details</strong> you give us, such as a username and email address, if a Game offers accounts.</li>
+      <li><strong>Gameplay data</strong> such as scores, match results, friends lists, lobby codes and in-game coin balances.</li>
+      <li><strong>Device and usage data</strong> such as device model, operating system, app version, crash reports and, where you allow it, an advertising identifier.</li>
+    </ul>
+    <p>We do not collect your precise location, contacts or photos.</p>
+
+    <h2>How we use it</h2>
+    <ul>
+      <li>to run online play, accounts, friends and leaderboards;</li>
+      <li>to fix bugs and improve the Games;</li>
+      <li>to show advertising, which helps keep the Games free;</li>
+      <li>to enforce our Terms and keep play fair.</li>
+    </ul>
+    <p>Our legal bases are performing our contract with you, our legitimate interests in running and improving the Games, and your consent where it is required (for example personalised ads).</p>
+
+    <h2>Who we share it with</h2>
+    <p>We use trusted service providers who process data for us: Google Firebase (hosting, databases, accounts) and Google AdMob (advertising). On iPhone, we ask for your permission through Apple's App Tracking Transparency prompt before any tracking for personalised ads. If you decline, you may still see non-personalised ads. We never sell your personal data.</p>
+
+    <h2>How long we keep it</h2>
+    <p>We keep account and gameplay data while your account is active and delete it within 30 days of a deletion request, unless we must keep it longer by law.</p>
+
+    <h2>Children</h2>
+    <p>Our Games are not directed at children under 13 and we do not knowingly collect their personal data. If you think a child has given us data, contact us and we will delete it.</p>
+
+    <h2>Your rights</h2>
+    <p>You can ask to access, correct, delete or export your data, or object to how we use it. You can request account deletion inside any Game that has accounts, or by emailing us. You also have the right to complain to the Information Commissioner's Office at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
+
+    <h2>Changes</h2>
+    <p>We may update this policy and will change the date above when we do.</p>
+
+    <h2>Contact</h2>
+    <p>Privacy questions or requests: <strong>[contact email]</strong></p>
+  </main>
+
+  <footer>
+    <span>© 2026 Happy Fun Games</span>
+    <nav aria-label="Footer">
+      <a href="#home" data-view="home">Home</a>
+      <a href="#terms" data-view="terms">Terms and Conditions</a>
+      <a href="#privacy" data-view="privacy">Privacy Policy</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var views={home:document.getElementById('view-home'),terms:document.getElementById('view-terms'),privacy:document.getElementById('view-privacy')};
+  function show(){
+    var h=(location.hash||'#home').slice(1);
+    var v=views[h]?h:'home';
+    Object.keys(views).forEach(function(k){views[k].hidden=(k!==v);});
+    document.querySelectorAll('header nav a').forEach(function(a){
+      if(a.getAttribute('href')==='#'+v||(v==='home'&&a.getAttribute('href')==='#home')) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    if(h==='games'){var g=document.getElementById('games');g&&g.scrollIntoView({behavior:'smooth'});}
+    else window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  show();
+})();
+</script>
+</body>
+</html>
